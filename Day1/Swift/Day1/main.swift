@@ -25,6 +25,6 @@ while true {
     i += 1
     if !set.insert(sum).inserted {
         print(sum)
-        break;
+        break
     }
 }
