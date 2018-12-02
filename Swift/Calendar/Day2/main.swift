@@ -8,16 +8,7 @@
 
 import Foundation
 
-// Input
-func readInput() -> [String] {
-    let frog = Frog("input.txt")
-    var lines: [String] = []
-    while let line = frog?.readLine() {
-        lines.append(line)
-    }
-    return lines
-}
-var lines = readInput()
+var lines = Frog("input.txt")!.readLines()
 
 // Part1
 var twice = 0, threeTimes = 0
