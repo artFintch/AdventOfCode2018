@@ -9,10 +9,15 @@
 import Foundation
 
 // Input
-var numbers: [Int] = []
-while let number = readLine().flatMap(Int.init) {
-    numbers.append(number)
+func readInput() -> [String] {
+    let frog = Frog("input.txt")
+    var lines: [String] = []
+    while let line = frog?.readLine() {
+        lines.append(line)
+    }
+    return lines
 }
+var numbers = readInput().compactMap(Int.init)
 
 // Part1
 print(numbers.reduce(0, +))
