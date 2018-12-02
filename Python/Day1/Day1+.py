@@ -9,5 +9,3 @@ for num in itertools.cycle(numbers):
         print(freq)
         break
     seen.add(freq)
-			    
-			    
