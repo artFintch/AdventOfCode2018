@@ -13,24 +13,21 @@ let numbers = Frog("input.txt")!.readNumbers()
 
 // Utils
 struct Node {
-    var childs = [Node]()
-    var meta = [Int]()
+    let childs: [Node]
+    let meta: [Int]
 }
 
 // Parsing Tree
-func buildTree(_ p: inout Int) -> Node {
-    let nc = numbers[p], mc = numbers[p + 1]
-    p += 2
+func buildTree() -> Node {
+    var iterator = numbers.makeIterator()
     
-    var n = Node()
-    n.childs += (0..<nc).map { _ in buildTree(&p) }
-    n.meta += numbers[p..<(p + mc)]
-    p += mc
-    
-    return n
+    func readNode() -> Node {
+        let nc = iterator.next()!, mc = iterator.next()!
+        return .init(childs: (0..<nc).map { _ in readNode() },
+                     meta: (0..<mc).map { _ in iterator.next()! })
+    }
+    return readNode()
 }
-func buildTree() -> Node { var p = 0; return buildTree(&p) }
-
 
 let tree = buildTree()
 
