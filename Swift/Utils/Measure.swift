@@ -12,5 +12,5 @@ func measure<T>(_ block: @autoclosure () -> T) {
     let start = Date()
     let result = block()
     let duration = Date().timeIntervalSince1970 - start.timeIntervalSince1970
-    print(result, String(format: "%.2fs", duration))
+    print(result, String(format: "%.3fs", duration))
 }
