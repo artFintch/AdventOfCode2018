@@ -109,26 +109,23 @@ func readInput() -> (matrix: [[Direction]], carts: [Cart]) {
     var matrix = Array(repeating: Array(repeating: Direction.none, count: w), count: h)
     var carts: [Cart] = []
     
+    let horizontal: [Character] = ["-", "+", ">", "<"]
     for y in 0..<lines.count {
         for x in 0..<lines[y].count {
             switch lines[y][x] {
+            case "/" where x + 1 < lines[y].count
+                && horizontal.contains(lines[y][x + 1]):
+                matrix[y][x] = [.right, .bottom]
+            
             case "/":
-                if x+1 < lines[y].count &&
-                    (lines[y][x+1] == "-" || lines[y][x+1] == "+" || lines[y][x+1] == ">" ||
-                        lines[y][x+1] == "<")  {
-                    matrix[y][x] = [.right, .bottom]
-                } else {
-                    matrix[y][x] = [.left, .top]
-                }
+                matrix[y][x] = [.left, .top]
+                
+            case "\\" where x + 1 < lines[y].count
+                && horizontal.contains(lines[y][x + 1]):
+                matrix[y][x] = [.right, .top]
                 
             case "\\":
-                if x+1 < lines[y].count &&
-                    (lines[y][x+1] == "-" || lines[y][x+1] == "+" || lines[y][x+1] == ">" ||
-                        lines[y][x+1] == "<") {
-                    matrix[y][x] = [.right, .top]
-                } else {
-                    matrix[y][x] = [.left, .bottom]
-                }
+                matrix[y][x] = [.left, .bottom]
                 
             case "-":
                 matrix[y][x] = .horizontal
