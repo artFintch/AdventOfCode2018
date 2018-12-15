@@ -27,10 +27,8 @@ class Unit: Comparable, Hashable {
     }
     
     static func == (lhs: Unit, rhs: Unit) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+        return lhs === rhs
     }
     
-    var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
-    }
+    func hash(into hasher: inout Hasher) { /* ?? */ }
 }
