@@ -49,35 +49,39 @@ extension NSMutableArray {
         return count
     }
     
-    @discardableResult
-    func keepPrefix(from: Int = 1, _ to: Int, _ length: Int) -> Int {
-        return replace(from: from, to: to, range: NSMakeRange(0, length)) {
-            insert(to, at: 0)
+    @discardableResult func keepPrefix(from: Int = 1, _ to: Int, _ length: Int) -> Int {
+        let index = self.index(of: from)
+        if index < length {
+            for _ in 0..<(length - index) {
+                insert(to, at: 0)
+            }
+        } else {
+            for _ in 0..<(index - length) {
+                removeObject(at: 0)
+            }
         }
+        return length - index
     }
     
-    @discardableResult
-    func keepSuffix(from: Int = 1, _ to: Int, _ length: Int) -> Int {
-        return replace(from: from, to: to, range: NSMakeRange(count - 4, 4)) {
-            add(to)
+    func keepSuffix(from: Int = 1, _ to: Int, _ length: Int) {
+        let start = count - 1
+        var index = start
+        let enumerator = reverseObjectEnumerator()
+        while let next = enumerator.nextObject() as? Int, next != from {
+            index -= 1
         }
-    }
-    
-    private func replace(from: Int,
-                         to: Int,
-                         range: NSRange,
-                         action: () -> Void) -> Int {
-        let index = self.index(of: from, in: range)
-        guard index != NSNotFound else { return 0 }
-        var count = 0
-        for _ in 0...(range.upperBound - index) {
-            action()
-            count += 1
+        
+        if (start - index) < length {
+            for _ in 0..<(length - (start - index)) {
+                add(to)
+            }
+        } else {
+            for _ in 0..<((start - index) - length) {
+                removeLastObject()
+            }
         }
-        return count
     }
 }
-
 
 func run(_ maxGen: Int) -> Int {
     let (line, map) = readInput()
@@ -95,6 +99,7 @@ func run(_ maxGen: Int) -> Int {
         }
         
         gen += 1
+        
         let key = line.string.trimmingCharacters(in: ["0"])
         if !patterns.insert(key).inserted { break }
     }
@@ -104,5 +109,5 @@ func run(_ maxGen: Int) -> Int {
         .reduce(0) { $0 + $1.element * ($1.offset - zero) }
 }
 
-measure(run(20))          // 0.003s
-measure(run(50000000000)) // 0.010s
+measure(run(20) == 2911) // 3ms
+measure(run(50000000000) == 2500000000695) // 10ms
