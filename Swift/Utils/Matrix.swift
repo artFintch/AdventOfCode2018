@@ -8,25 +8,31 @@
 
 import Foundation
 
-struct Matrix<T> {
+struct Matrix<Element> {
     let columns: Int
     let rows: Int
-    var array: [T]
+    var array: [Element]
     
-    init(_ columns: Int, _ rows: Int, _ initialValue: T) {
+    init(_ columns: Int, _ rows: Int, _ initialValue: Element) {
         self.columns = columns
         self.rows = rows
         array = .init(repeating: initialValue, count: rows * columns)
     }
     
-    subscript(_ column: Int, _ row: Int) -> T {
+    subscript(_ column: Int, _ row: Int) -> Element {
         get { return array[row * columns + column] }
         set { array[row * columns + column] = newValue }
     }
-    
-    subscript(_ point: Point) -> T {
+}
+
+extension Matrix {
+    subscript(_ point: Point) -> Element {
         get { return array[point.y * columns + point.x] }
         set { array[point.y * columns + point.x] = newValue }
+    }
+    
+    func contains(_ point: Point) -> Bool {
+        return point.y < rows && point.x < columns
     }
     
     mutating func swap(_ one: Point, _ two: Point) {
