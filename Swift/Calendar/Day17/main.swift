@@ -57,9 +57,9 @@ func dfs(_ begin: Point, _ maxY: Int, _ matrix: inout Matrix<Int>, _ isTop: Bool
 
 func run() {
     var (matrix, spring, yMax) = buildMatrix()
-    dfs(spring, yMax, &matrix)
+    _ = dfs(spring, yMax, &matrix)
     
-     print(1 + matrix.array.reduce(0) { $0 + ($1 == 2 ? 1 : 0) } == 36787)
+     print(1 + matrix.array.reduce(0) { $0 + ($1 == 2 ? 1 : 0) } == 30635)
     
     for y in 0..<matrix.rows {
         for x in 0..<matrix.columns {
@@ -95,7 +95,7 @@ func run() {
         }
     }
     
-    print(matrix.array.reduce(0) { $0 + ($1 == 2 ? 1 : 0) } == 29662)
+    print(matrix.array.reduce(0) { $0 + ($1 == 2 ? 1 : 0) } == 25094)
 }
 
 measure(run()) // 23 ms
