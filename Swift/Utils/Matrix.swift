@@ -32,7 +32,7 @@ extension Matrix {
     }
     
     func contains(_ point: Point) -> Bool {
-        return point.y < rows && point.x < columns
+        return 0..<columns ~= point.x && 0..<rows ~= point.y
     }
     
     mutating func swap(_ one: Point, _ two: Point) {
