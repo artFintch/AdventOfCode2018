@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112233C121CD7EF1008082E1 /* Array+GetThrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119764E821C6E0E700FFB036 /* Array+GetThrows.swift */; };
 		11333C7521C0262700192AC0 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E6BA8E21BD910F00AEDA36 /* Measure.swift */; };
 		11333C7621C0262700192AC0 /* UnsafeMutablePointer+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C7EFE21B3E6B200DE8DF4 /* UnsafeMutablePointer+File.swift */; };
 		11333C7821C0262700192AC0 /* Frog+ReadNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E6BA2621BB93BB00AEDA36 /* Frog+ReadNumbers.swift */; };
@@ -50,16 +51,13 @@
 		118C7F2221B3E7E600DE8DF4 /* input.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 118C7F0F21B3E7A100DE8DF4 /* input.txt */; };
 		118C7F2321B3E7EA00DE8DF4 /* input.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 118C7F1221B3E7C000DE8DF4 /* input.txt */; };
 		118EF50621CAA8C900F40836 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E6BA8E21BD910F00AEDA36 /* Measure.swift */; };
-		118EF50821CAA8C900F40836 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF16DA21C55C890039F2B2 /* Matrix.swift */; };
 		118EF50921CAA8C900F40836 /* Frog+ReadLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1091A21C641640029EC0F /* Frog+ReadLines.swift */; };
 		118EF50A21CAA8C900F40836 /* UnsafeMutablePointer+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C7EFE21B3E6B200DE8DF4 /* UnsafeMutablePointer+File.swift */; };
 		118EF50B21CAA8C900F40836 /* Frog+ReadNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E6BA2621BB93BB00AEDA36 /* Frog+ReadNumbers.swift */; };
-		118EF50D21CAA8C900F40836 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF16C121C5332D0039F2B2 /* Point.swift */; };
 		118EF50E21CAA8C900F40836 /* Frog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C7F0021B3E6B200DE8DF4 /* Frog.swift */; };
 		118EF50F21CAA8C900F40836 /* String+Newline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C7EFF21B3E6B200DE8DF4 /* String+Newline.swift */; };
 		118EF51C21CAA8FB00F40836 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118EF51A21CAA8FB00F40836 /* main.swift */; };
 		118EF52121CAAD1600F40836 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119764E621C6E0C800FFB036 /* Operation.swift */; };
-		118EF52221CAAD1600F40836 /* Array+GetThrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119764E821C6E0E700FFB036 /* Array+GetThrows.swift */; };
 		118EF52521CAAE5100F40836 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119764E021C6E06900FFB036 /* Instruction.swift */; };
 		118EF52621CAB1BD00F40836 /* input.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 118EF51821CAA8FB00F40836 /* input.txt */; };
 		119764E121C6E06900FFB036 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119764E021C6E06900FFB036 /* Instruction.swift */; };
@@ -1315,15 +1313,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				118EF52121CAAD1600F40836 /* Operation.swift in Sources */,
+				112233C121CD7EF1008082E1 /* Array+GetThrows.swift in Sources */,
 				118EF50621CAA8C900F40836 /* Measure.swift in Sources */,
 				118EF51C21CAA8FB00F40836 /* main.swift in Sources */,
-				118EF50821CAA8C900F40836 /* Matrix.swift in Sources */,
 				118EF50921CAA8C900F40836 /* Frog+ReadLines.swift in Sources */,
-				118EF52221CAAD1600F40836 /* Array+GetThrows.swift in Sources */,
 				118EF52521CAAE5100F40836 /* Instruction.swift in Sources */,
 				118EF50A21CAA8C900F40836 /* UnsafeMutablePointer+File.swift in Sources */,
 				118EF50B21CAA8C900F40836 /* Frog+ReadNumbers.swift in Sources */,
-				118EF50D21CAA8C900F40836 /* Point.swift in Sources */,
 				118EF50E21CAA8C900F40836 /* Frog.swift in Sources */,
 				118EF50F21CAA8C900F40836 /* String+Newline.swift in Sources */,
 			);
