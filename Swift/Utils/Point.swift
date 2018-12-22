@@ -23,3 +23,10 @@ struct Point: Comparable, Hashable {
         return Point(lhs.x + rhs.x, lhs.y + rhs.y)
     }
 }
+
+extension Point {
+    
+    init(_ array: [Int]) {
+        (x, y) = (array[0], array[1])
+    }
+}

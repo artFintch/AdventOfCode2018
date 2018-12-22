@@ -39,4 +39,15 @@ extension Matrix {
         array.swapAt(one.y * columns + one.x,
                      two.y * columns + two.x)
     }
+    
+    mutating func apply(_ transform: (Element) -> Element) {
+        for index in array.indices {
+            array[index] = transform(array[index])
+        }
+    }
+    
+    func reduce<Result>(_ initialResult: Result,
+                        _ nextPartialResult: (Result, Element) -> Result) -> Result {
+        return array.reduce(initialResult, nextPartialResult)
+    }
 }
