@@ -1,8 +1,8 @@
 //
 //  main.swift
-//  Day22
+//  Day21
 //
-//  Created by Vyacheslav Khorkov on 22/12/2018.
+//  Created by Vyacheslav Khorkov on 21/12/2018.
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
