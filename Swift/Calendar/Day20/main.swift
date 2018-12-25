@@ -8,47 +8,98 @@
 
 import Foundation
 
-// ^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$
-// ^ENWWW(NEEE|SSE(EE|N))$
-func readInput() -> String {
-    return String(Frog("input.txt")!.readLine()!.dropFirst().dropLast())
+extension Matrix where Element == Int {
+    mutating func move(_ position: Point, _ character: Character) -> Point {
+        let shift: Point
+        switch character {
+        case "N": shift = Point(0, -1)
+        case "S": shift = Point(0, 1)
+        case "W": shift = Point(-1, 0)
+        case "E": shift = Point(1, 0)
+        default: fatalError()
+        }
+        self[position + shift] = 1
+        self[position + shift + shift] = 2
+        return position + shift + shift
+    }
 }
 
-struct Node {
-    let childs: [Node]
+func dfs(_ begin: Point, _ matrix: Matrix<Int>) -> [Point: Int] {
+    let shifts = [Point(0, -1), Point(0, 1), Point(-1, 0), Point(1, 0)]
+    var matrix = matrix
+    var map: [Point: Int] = [:]
+    dfs(begin, shifts, &matrix, 0, &map)
+    return map
+}
+
+func dfs(_ begin: Point,
+         _ shifts: [Point],
+         _ matrix: inout Matrix<Int>,
+         _ steps: Int,
+         _ map: inout [Point: Int]) {
+    for shift in shifts {
+        let next = begin + shift
+        if matrix.contains(next) && matrix[next] == 1 {
+            matrix[next] = 0
+            dfs(next + shift, shifts, &matrix, steps + 1, &map)
+        }
+    }
+    map[begin] = Swift.max(map[begin] ?? 0, steps)
+}
+
+protocol Nodable {}
+class Leaf: Nodable {
     let value: String
+    init(value: String) {
+        self.value = value
+    }
 }
+class Node: Nodable {
+    let childs: [Nodable]
+    init(childs: [Nodable]) {
+        self.childs = childs
+    }
+}
+class AndNode: Node {}
+class OrNode: Node {}
 
-// ^ENWWW(NEEE|SSE(EE|N))$
-// ENWWW
-// - NEEE
-// - SSE
-//   - EE
-//   - N
-
-
-func buildTree(_ line: String) -> [Node] {
+func buildTree(_ line: String) -> Nodable {
     var iterator = line.makeIterator()
     
-    func readNodes() -> [Node] {
+    func readNode() -> Nodable {
         var line = ""
-        var nodes: [Node] = []
+        var orChilds: [Nodable] = []
+        var andChilds: [Nodable] = []
         var prev: Character!
         while let next = iterator.next() {
             switch next {
             case "(":
-                nodes.append(Node(childs: readNodes(), value: line))
+                andChilds.append(Leaf(value: line))
+                andChilds.append(readNode())
                 line = ""
                 
             case "|":
-                nodes.append(Node(childs: [], value: line))
+                if andChilds.isEmpty {
+                    orChilds.append(Leaf(value: line))
+                } else {
+                    andChilds.append(Leaf(value: line))
+                    orChilds.append(AndNode(childs: andChilds))
+                    andChilds = []
+                }
                 line = ""
                 
             case ")":
                 if !line.isEmpty || prev == "|" {
-                    nodes.append(Node(childs: [], value: line))
+                    andChilds.append(Leaf(value: line))
                 }
-                return nodes
+                if !andChilds.isEmpty {
+                    if andChilds.count == 1 {
+                        orChilds.append(andChilds[0])
+                    } else {
+                        orChilds.append(AndNode(childs: andChilds))
+                    }
+                }
+                return OrNode(childs: orChilds)
                 
             default:
                 line.append(next)
@@ -57,174 +108,60 @@ func buildTree(_ line: String) -> [Node] {
         }
         
         if !line.isEmpty {
-            nodes.append(Node(childs: [], value: line))
+            andChilds.append(Leaf(value: line))
         }
         
-        return nodes
-    }
-    return readNodes()
-}
-
-extension Matrix where Element == Int {
-    
-    mutating func move(_ position: Point, _ character: Character) -> Point {
-        switch character {
-        case "N":
-            self[position + Point(0, -1)] = 1
-            self[position + Point(0, -2)] = 2
-            return position + Point(0, -2)
-        case "S":
-            self[position + Point(0, 1)] = 1
-            self[position + Point(0, 2)] = 2
-            return position + Point(0, 2)
-        case "W":
-            self[position + Point(-1, 0)] = 1
-            self[position + Point(-2, 0)] = 2
-            return position + Point(-2, 0)
-        case "E":
-            self[position + Point(1, 0)] = 1
-            self[position + Point(2, 0)] = 2
-            return position + Point(2, 0)
-        default:
-            fatalError()
+        if andChilds.count == 1 {
+            return andChilds[0]
+        } else {
+            return AndNode(childs: andChilds)
         }
     }
+    return readNode()
 }
 
-func traverse(_ node: Node,
-              pos: Point,
-              _ matrix: inout Matrix<Int>,
-              _ leaves: inout Set<Point>) {
-    var pos = pos
-    for character in node.value {
-        pos = matrix.move(pos, character)
+@discardableResult
+func fillMatrix(_ root: Nodable, _ position: Point, _ matrix: inout Matrix<Int>) -> Point {
+    var position = position
+    switch root {
+    case let leaf as Leaf:
+        leaf.value.forEach { position = matrix.move(position, $0) }
+    case let andNode as AndNode:
+        andNode.childs.forEach { position = fillMatrix($0, position, &matrix) }
+    case let orNode as OrNode:
+        orNode.childs.forEach { fillMatrix($0, position, &matrix) }
+    default: break
     }
-    
-    if node.childs.isEmpty {
-        leaves.insert(pos)
-        return
-    }
-    
-    for child in node.childs {
-        traverse(child, pos: pos, &matrix, &leaves)
-    }
+    return position
 }
 
-extension Matrix where Element == Int {
-    func print() {
-        var text = ""
-        for y in 0..<rows {
-            for x in 0..<columns {
-                switch self[x, y] {
-                case 0:
-                    text += "#"
-                case 1:
-                    text += "+"
-                case 2:
-                    text += "."
-                case 3:
-                    text += "X"
-                default:
-                    fatalError()
-                }
-            }
-            text += "\n"
-        }
-        Swift.print(text)
-    }
-}
-
-func traverse2(_ pos: Point,
-               _ matrix: inout Matrix<Int>,
-               _ steps: Int,
-               _ max: inout Int) {
-    let top = pos + Point(0, -1)
-    if matrix.contains(top) && matrix[top] == 1 {
-        matrix[top] = 0
-        traverse2(top + Point(0, -1), &matrix, steps + 1, &max)
-    }
-    
-    let bottom = pos + Point(0, 1)
-    if matrix.contains(bottom) && matrix[bottom] == 1 {
-        matrix[bottom] = 0
-        traverse2(bottom + Point(0, 1), &matrix, steps + 1, &max)
-    }
-    
-    let left = pos + Point(-1, 0)
-    if matrix.contains(left) && matrix[left] == 1 {
-        matrix[left] = 0
-        traverse2(left + Point(-1, 0), &matrix, steps + 1, &max)
-    }
-    
-    let right = pos + Point(1, 0)
-    if matrix.contains(right) && matrix[right] == 1 {
-        matrix[right] = 0
-        traverse2(right + Point(1, 0), &matrix, steps + 1, &max)
-    }
-    
-    max = Swift.max(max, steps)
-}
-
-func buildMatrix(_ nodes: [Node]) {
-    var matrix = Matrix(20, 20, 0)
+func buildMatrix(_ root: Nodable) -> Matrix<Int> {
+    var matrix = Matrix(250, 250, 0)
     let begin = Point(matrix.columns / 2, matrix.rows / 2)
     matrix[begin] = 3
-    var leaves: Set<Point> = [begin]
-    
-    matrix.print()
-    for node in nodes {
-        var leaves2: Set<Point> = []
-        for leaf in leaves {
-            traverse(node, pos: leaf, &matrix, &leaves2)
-        }
-        leaves = leaves2
-        matrix.print()
-    }
-    
-    var max = 0
-    traverse2(begin, &matrix, 0, &max)
-    print(max)
+    fillMatrix(root, begin, &matrix)
+    return matrix
 }
 
-let line = readInput()
-let nodes = buildTree(line)
-//buildMatrix(nodes)
-
-// ^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$
-// ESSWWN
-// > E
-// > NNENN
-//   > EESS
-//     > WNSE
-//     >
-//   > SSS
-//   > WWWSSSSE
-//     > SW
-//     > NNNE
-func traverse3(_ node: Node, _ d: String = ">") {
-    print(d, node.value)
-    for childNode in node.childs {
-        traverse3(childNode, d + ">")
-    }
-}
-for node in nodes {
-    traverse3(node)
+func silver(_ input: String, _ begin: Point, _ matrix: Matrix<Int>) -> Int {
+    let root = buildTree(input)
+    var matrix = matrix
+    fillMatrix(root, begin, &matrix)
+    let map = dfs(begin, matrix)
+    return map.max { $0.value < $1.value }!.value
 }
 
-//
-//// ^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$
-//var cur = ""
-//for node in nodes {
-//    cur += node.value + "."
-//    for child in node.childs {
-//        traverse(child, {
-//            cur += "." + $0.value
-//            //print("b", $0.value)
-//            print(cur)
-//        }, {
-//            cur.removeLast($0.value.count + 1)
-////            print(cur)
-////            print("a", $0.value)
-//        })
-//    }
-//}
+func gold(_ input: String, _ begin: Point, _ matrix: Matrix<Int>) -> Int {
+    let root = buildTree(input)
+    var matrix = matrix
+    fillMatrix(root, begin, &matrix)
+    let map = dfs(begin, matrix)
+    return map.filter { $0.value >= 1000 }.count
+}
+
+let input = String(Frog("input.txt")!.readLine()!.dropFirst().dropLast())
+let matrix = Matrix(250, 250, 0)
+let begin = Point(matrix.columns / 2, matrix.rows / 2)
+
+measure(silver(input, begin, matrix) == 3755) // 9ms
+measure(gold(input, begin, matrix) == 8627)   // 11ms
