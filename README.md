@@ -1,5 +1,5 @@
 [![About](https://img.shields.io/badge/Advent_Of_Code-2018-brightgreen.svg)](https://adventofcode.com/2018/about)
-![Swift](https://img.shields.io/badge/Swift-orange.svg)
+![Swift](https://img.shields.io/badge/Swift_4.2-orange.svg)
 
 | ![Day1](https://img.shields.io/badge/Day1-★-gold.svg) | ![Day2](https://img.shields.io/badge/Day2-★-gold.svg) | ![Day3](https://img.shields.io/badge/Day3-★-gold.svg)  | ![Day4](https://img.shields.io/badge/Day4-★-gold.svg) | ![Day5](https://img.shields.io/badge/Day5-★-gold.svg) | ![Day6](https://img.shields.io/badge/Day6-★-gold.svg) | ![Day7](https://img.shields.io/badge/Day7-★-gold.svg) |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
