@@ -2,6 +2,8 @@
 ![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![macOS](https://img.shields.io/badge/Platform-macOS-lightgrey.svg)
 
+![reindeer](https://github.com/artFintch/AdventOfCode2018/blob/master/Imgs/reindeer.png)
+
 | ![Day1](https://img.shields.io/badge/Day1-★-gold.svg) | ![Day2](https://img.shields.io/badge/Day2-★-gold.svg) | ![Day3](https://img.shields.io/badge/Day3-★-gold.svg)  | ![Day4](https://img.shields.io/badge/Day4-★-gold.svg) | ![Day5](https://img.shields.io/badge/Day5-★-gold.svg) | ![Day6](https://img.shields.io/badge/Day6-★-gold.svg) | ![Day7](https://img.shields.io/badge/Day7-★-gold.svg) |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | ![Day8](https://img.shields.io/badge/Day8-★-gold.svg) | ![Day9](https://img.shields.io/badge/Day9-★-gold.svg) | ![Day10](https://img.shields.io/badge/Day10-★-gold.svg) | ![Day11](https://img.shields.io/badge/Day11-★-gold.svg) | ![Day12](https://img.shields.io/badge/Day12-★-gold.svg) | ![Day13](https://img.shields.io/badge/Day13-★-gold.svg) | ![Day14](https://img.shields.io/badge/Day14-★-gold.svg) |
