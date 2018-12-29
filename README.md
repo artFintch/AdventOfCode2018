@@ -2,7 +2,7 @@
 ![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg)
 ![macOS](https://img.shields.io/badge/Platform-macOS-lightgrey.svg)
 
-<img src="https://github.com/artFintch/AdventOfCode2018/blob/master/Imgs/reindeer.png" width="370" height="370">
+<img src="https://github.com/artFintch/AdventOfCode2018/blob/master/Imgs/reindeer.png" width="466" height="380">
 
 | ![Day1](https://img.shields.io/badge/Day1-★-gold.svg) | ![Day2](https://img.shields.io/badge/Day2-★-gold.svg) | ![Day3](https://img.shields.io/badge/Day3-★-gold.svg) | ![Day4](https://img.shields.io/badge/Day4-★-gold.svg) | ![Day5](https://img.shields.io/badge/Day5-★-gold.svg) |
 |-|-|-|-|-|
