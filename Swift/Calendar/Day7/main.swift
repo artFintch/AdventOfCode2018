@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 func readInput() -> ([Character: Set<Character>], [Character: Int], Set<Character>) {
     let lines = Frog("input.txt")!.readLines().map { Array($0) }.map { ($0[5], $0[36]) }

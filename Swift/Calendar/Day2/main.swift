@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 var lines = Frog("input.txt")!.readLines()
 

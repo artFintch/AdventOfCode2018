@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 func readField() -> ([Unit], Set<Unit>, Set<Unit>, Matrix<Unit>) {
     let lines = Frog("input.txt")!.readLines().map { Array($0) }

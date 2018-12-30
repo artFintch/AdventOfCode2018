@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 func distance(_ lhs: [Int], _ rhs: [Int]) -> Int {
     return lhs.indices.reduce(0) { $0 + Swift.abs(lhs[$1] - rhs[$1]) }

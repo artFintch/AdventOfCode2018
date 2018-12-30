@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 func buildMatrix(_ input: Int) -> ([[Int]], Range<Int>) {
     var m = Array(repeating: Array(repeating: 0, count: 301), count: 301)
     for y in m.indices.dropLast() {

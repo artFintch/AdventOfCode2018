@@ -5,7 +5,7 @@
 //  Created by Vyacheslav Khorkov on 09/12/2018.
 //
 
-import Foundation
+import Frog
 
 // Utils
 extension NSMutableArray {

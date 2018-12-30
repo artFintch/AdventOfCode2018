@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 func readInput() -> Matrix<Int> {
     let lines = Frog("input.txt")!.readLines()

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 // Utils
 struct Rect { let n: Int, x: Int, y: Int, w: Int, h: Int }

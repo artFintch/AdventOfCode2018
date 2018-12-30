@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 let input = Array(Frog("input.txt")!.readLine()!).map(String.init)
 

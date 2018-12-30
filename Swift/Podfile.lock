@@ -1,0 +1,16 @@
+PODS:
+  - Frog (1.0.2)
+
+DEPENDENCIES:
+  - Frog
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Frog
+
+SPEC CHECKSUMS:
+  Frog: ff526897c40bca06c042a4b4e22f3905a9110f26
+
+PODFILE CHECKSUM: 00dff1e4e98e358a0154b26b28216b74c1a75f52
+
+COCOAPODS: 1.6.0.beta.2

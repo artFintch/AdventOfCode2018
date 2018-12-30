@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 extension Matrix where Element == Int {
     mutating func move(_ position: Point, _ character: Character) -> Point {

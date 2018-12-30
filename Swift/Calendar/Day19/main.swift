@@ -6,7 +6,7 @@
 //  Copyright © 2018 Vyacheslav Khorkov. All rights reserved.
 //
 
-import Foundation
+import Frog
 
 let operations: [String: Operation] = [
     "addr": .init("addr") { $0[$3] = try $0.get($1) + $0.get($2) },
