@@ -8,8 +8,7 @@
 
 import Frog
 
-public extension Frog {
-    
+extension Frog {    
     func readLines(_ count: Int, stopEmpty: Bool = false) -> [String] {
         var lines: [String] = []
         for _ in 0..<count {

@@ -11,7 +11,7 @@ import Foundation
 struct Matrix<Element> {
     let columns: Int
     let rows: Int
-    var array: [Element]
+    private var array: [Element]
     
     init(_ columns: Int, _ rows: Int, _ initialValue: Element) {
         self.columns = columns
@@ -22,6 +22,24 @@ struct Matrix<Element> {
     subscript(_ column: Int, _ row: Int) -> Element {
         get { return array[row * columns + column] }
         set { array[row * columns + column] = newValue }
+    }
+}
+
+extension Matrix: Collection {
+    func index(after i: Point) -> Point {
+        if i.x + 1 < columns {
+            return i + Point(1, 0)
+        } else {
+            return Point(0, i.y + 1)
+        }
+    }
+    
+    var startIndex: Point {
+        return Point.zero
+    }
+    
+    var endIndex: Point {
+        return Point(Swift.max(0, columns - 1), Swift.max(0, rows - 1))
     }
 }
 

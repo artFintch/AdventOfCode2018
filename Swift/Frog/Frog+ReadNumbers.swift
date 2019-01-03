@@ -8,8 +8,7 @@
 
 import Frog
 
-public extension Frog {
-    
+extension Frog {
     func readNumbers(_ separator: String = " ") -> [Int] {
         guard let line = readLine() else { return [] }
         return line

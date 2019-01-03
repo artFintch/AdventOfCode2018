@@ -8,39 +8,34 @@
 
 import Frog
 
-// Utils
-extension DateFormatter {
-    convenience init(_ dateFormat: String) {
-        self.init()
-        self.dateFormat = dateFormat
+extension Dictionary where Key == Int, Value == Int {
+    func sum() -> Int {
+        return values.reduce(0, +)
+    }
+    
+    func max() -> Int? {
+        return values.max()
     }
 }
 
-// Input
-let parser = DateFormatter("yyyy-MM-dd HH:mm")
-let lines = Frog("input.txt")!.readLines().lazy
-    .map { $0.components(separatedBy: ["[", "]", " ", "#"]).filter { !$0.isEmpty } }
-    .map { (parser.date(from: "\($0[0]) \($0[1])")!, $0[2].hasPrefix("f"), Int($0[3])) }
-    .sorted { $0.0 < $1.0 }
-    .map { (Calendar.current.component(.minute, from: $0.0), $0.1, $0.2) }
-
-var begin = -1, id = -1
-var schedule: [Int: [Int: Int]] = [:]
-for line in lines {
-    if line.2 != nil { id = line.2! }
-    else if line.1 { begin = line.0 }
-    else { (begin..<line.0).forEach { schedule[id, default: [:]][$0, default: 0] += 1 } }
+func silver(_ records: [GuardRecord]) -> Int {
+    let schedule = Schedule(records)
+    let id = schedule.lazy
+        .max { lhs, rhs in lhs.value.sum() < rhs.value.sum() }
+        .map { id, _ in id }!
+    let minutes = schedule[id]!.lazy
+        .max { lhs, rhs in lhs.value < rhs.value }
+        .map { id, _ in id }!
+    return minutes * id
 }
 
-let gid = schedule.lazy
-    .map { ($0.key, $0.value.values.reduce(0, +)) }
-    .max { $0.1 < $1.1 }
-    .map { $0.0 }!
-let frqm = schedule[gid]!.lazy
-    .max { $0.1 < $1.1 }
-    .map { $0.0 }!
-print(frqm * gid) // Part 1
+func gold(_ records: [GuardRecord]) -> Int {
+    let schedule = Schedule(records)
+    let maxGuard = schedule.max { lhs, rhs in lhs.value.max()! < rhs.value.max()! }!
+    let sameMin = maxGuard.value.max { lhs, rhs in lhs.value < rhs.value }!
+    return maxGuard.key * sameMin.key
+}
 
-let maxGuard = schedule.max { $0.value.values.max()! < $1.value.values.max()! }!
-let sameMin = maxGuard.1.max { $0.1 < $1.1 }!.0
-print(maxGuard.0 * sameMin) // Part 2
+let records = Frog().readGuardRecords()
+measure(silver(records) == 138280) // 3 ms
+measure(gold(records) == 89347)    // 3 ms

@@ -8,6 +8,12 @@
 
 import Frog
 
+extension Frog {
+    func readFrequencies() -> [Int] {
+        return readLines().compactMap(Int.init)
+    }
+}
+
 func silver(_ input: [Int]) -> Int {
     return input.reduce(0, +)
 }
@@ -22,9 +28,6 @@ func gold(_ input: [Int]) -> Int {
     return frequency
 }
 
-var numbers = Frog("input.txt")!
-    .readLines()
-    .compactMap(Int.init)
-
-measure(silver(numbers) == 420)
-measure(gold(numbers) == 227)
+let numbers = Frog().readFrequencies()
+measure(silver(numbers) == 420) // ~1 ms
+measure(gold(numbers) == 227)   // ~19 ms

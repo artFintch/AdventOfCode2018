@@ -10,7 +10,7 @@ import Frog
 // Utils
 extension NSMutableArray {
     func rotate(_ value: Int) {
-        for _ in 0..<abs(value) {
+        for _ in 0..<Swift.abs(value) {
             if value > 0 {
                 insert(self[count - 1], at: 0)
                 removeLastObject()

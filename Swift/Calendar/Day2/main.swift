@@ -8,25 +8,29 @@
 
 import Frog
 
-var lines = Frog("input.txt")!.readLines()
-
-// Part1
-var twice = 0, threeTimes = 0
-for line in lines {
-    let map = Dictionary(grouping: line, by: { $0 })
-    let uniq = Set(map.values.map { $0.count })
-    if uniq.contains(3) { threeTimes += 1 }
-    if uniq.contains(2) { twice += 1 }
+func silver(_ input: [String]) -> Int {
+    var (twice, threeTimes) = (0, 0)
+    for line in input {
+        let map = Dictionary(grouping: line, by: { $0 })
+        let set = Set(map.values.map { $0.count })
+        if set.contains(3) { threeTimes += 1 }
+        if set.contains(2) { twice += 1 }
+    }
+    return twice * threeTimes
 }
-print(twice * threeTimes)
 
-// Part2
-search: for lineBox in lines.enumerated() {
-    for line in lines.dropFirst(lineBox.offset) {
-        let compare = zip(lineBox.element, line).filter(==)
-        if line.count == compare.count + 1 {
-            print(compare.reduce("") { $0 + String($1.0) })
-            break search
+func gold(_ input: [String]) -> String? {
+    for (lhs, rhs) in input.makeCombinationsIterator() {
+        if lhs.compare(byChatacters: rhs, threshold: 1) {
+            return zip(lhs, rhs).lazy
+                .filter(==)
+                .map { (lhs, rhs) in String(lhs) }
+                .reduce("", +)
         }
     }
+    return nil
 }
+
+let lines = Frog("input.txt")!.readLines()
+measure(silver(lines) == 6723)                       // ~5 ms
+measure(gold(lines) == "prtkqyluiusocwvaezjmhmfgx")  // ~10 ms

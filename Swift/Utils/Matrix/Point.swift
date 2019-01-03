@@ -25,7 +25,10 @@ struct Point: Comparable, Hashable {
 }
 
 extension Point {
-    
+    static let zero = Point(0, 0)
+}
+
+extension Point {
     init(_ array: [Int]) {
         (x, y) = (array[0], array[1])
     }
