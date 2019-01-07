@@ -1,16 +1,20 @@
 PODS:
-  - Frog (1.0.2)
+  - AdventCode (1.1.1):
+    - Frog
+  - Frog (1.1.2)
 
 DEPENDENCIES:
-  - Frog
+  - AdventCode
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AdventCode
     - Frog
 
 SPEC CHECKSUMS:
-  Frog: ff526897c40bca06c042a4b4e22f3905a9110f26
+  AdventCode: 45963afff42e725f8c58f871b40f74899393f08f
+  Frog: 19f85e3159d791e32dea2a0178f349a0524d50a3
 
-PODFILE CHECKSUM: 41829d32511e5fd8e0966ac7cc97fd7536fea6de
+PODFILE CHECKSUM: 1c69bbaf86cfd16d2656a7f77fed4c25bbe48e66
 
 COCOAPODS: 1.6.0.beta.2

@@ -18,6 +18,22 @@ struct Sample {
 }
 
 extension Frog {
+    func readLines(_ count: Int, stopEmpty: Bool = false) -> [String] {
+        var lines: [String] = []
+        for _ in 0..<count {
+            guard let line = readLine() else { break }
+            if stopEmpty && line.isEmpty { break }
+            lines.append(line)
+        }
+        return lines
+    }
+    
+    func skip() {
+        _ = readLine()
+    }
+}
+
+extension Frog {
     func readSample() -> Sample? {
         let lines = readLines(3, stopEmpty: true)
         guard lines.count == 3 else { return nil }

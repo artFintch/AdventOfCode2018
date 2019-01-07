@@ -41,10 +41,5 @@ struct Group: Hashable {
         self.speed = speed
     }
     
-//    static func == (lhs: Group, rhs: Group) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-    
-    func hash(into hasher: inout Hasher) {
-    }
+    func hash(into hasher: inout Hasher) {}
 }
