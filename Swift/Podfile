@@ -1,9 +1,5 @@
 platform :osx, '10.10'
 
-# Install for all targets
-project = Xcodeproj::Project.open "Swift.xcodeproj"
-project.targets.each do |t|
-  target t.name do
+target 'Tests' do
     pod 'AdventCode'
-  end
 end
