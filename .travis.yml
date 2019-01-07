@@ -1,0 +1,13 @@
+os: osx
+osx_image: xcode10.1
+branches:
+ only:
+  - master
+
+script:
+ - set -o pipefail
+ - pod --version
+ - gem install cocoapods --pre
+ - pod repo update
+ - pod install --project-directory=Swift
+ - xcodebuild test -workspace Swift/Swift.xcworkspace -scheme Tests | xcpretty
