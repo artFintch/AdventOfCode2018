@@ -23,10 +23,9 @@ class Day18Tests: XCTestCase {
     }
     
     func testGold() {
-        XCTAssert(solution.checkGold())
         measure {
             // Need optimisations
-            // XCTAssert(solution.checkGold())
+            XCTAssert(solution.checkGold())
         }
     }
 }

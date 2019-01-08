@@ -17,10 +17,9 @@ class Day6Tests: XCTestCase {
     )
     
     func testSilver() {
-        XCTAssert(solution.checkSilver())
         measure {
             // Need optimisations
-            // XCTAssert(solution.checkSilver())
+            XCTAssert(solution.checkSilver())
         }
     }
     
