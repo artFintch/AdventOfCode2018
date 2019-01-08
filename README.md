@@ -6,7 +6,7 @@
 ![macOS](https://img.shields.io/badge/Platform-macOS-lightgrey.svg)
 
 <!--- Start --->
-| ![day1](/Swift/Metrics/day1.svg) | ![silver](/Swift/Metrics/day1_silver.svg) | ![gold](/Swift/Metrics/day1_gold.svg) |
+| `Day 1` | ![silver](/Swift/Metrics/day1_silver.svg) | ![gold](/Swift/Metrics/day1_gold.svg) |
 |-|-|-|
-| ![day1](/Swift/Metrics/day2.svg) | ![silver](/Swift/Metrics/day2_silver.svg) | ![gold](/Swift/Metrics/day2_gold.svg) |
+| `Day 2` | ![silver](/Swift/Metrics/day2_silver.svg) | ![gold](/Swift/Metrics/day2_gold.svg) |
 <!--- End --->
